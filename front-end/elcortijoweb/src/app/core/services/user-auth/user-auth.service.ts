@@ -13,7 +13,7 @@ const TOKEN_KEY = 'jwt-auth-token';
 })
 export class UserAuthService {
   public isLogged$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-
+  public isUser$: ReplaySubject<string | null> = new ReplaySubject<string | null>(1);
 
   constructor(
     private http: HttpClient,
@@ -21,6 +21,9 @@ export class UserAuthService {
     ) {
     const isLogged = this.isLogged();
     this.isLogged$.next(isLogged);
+
+    const isUserRol = this.isUser();
+    this.isUser$.next(isUserRol)
   }
   public login(user: UserI): Observable<IUserSingInResponse> {
     return this.http.post<IUserSingInResponse>(`${URL_USER}/login`, user).pipe(
@@ -73,6 +76,11 @@ export class UserAuthService {
       return false;
     }
     return !!userToken;
+  }
+
+  public isUser(): string|null{
+    const userRol = localStorage.getItem(TOKEN_KEY);
+    return userRol ? JSON.parse(userRol).rol : null;
   }
 
 

@@ -4,6 +4,7 @@ import { FormBookingComponent } from './components/form-booking/form-booking.com
 import { CountClientComponent } from './components/count-client/count-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormUserComponent } from './components/form-user/form-user.component';
+import { FormCreateRoomsComponent } from './components/form-create-rooms/form-create-rooms.component';
 
 
 
@@ -11,7 +12,8 @@ import { FormUserComponent } from './components/form-user/form-user.component';
   declarations: [
     FormBookingComponent,
     CountClientComponent,
-    FormUserComponent
+    FormUserComponent,
+    FormCreateRoomsComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { FormUserComponent } from './components/form-user/form-user.component';
   ],
   exports:[
     FormBookingComponent,
-    FormUserComponent
+    FormUserComponent,
+    FormCreateRoomsComponent
   ]
 })
 export class SharedModule { }

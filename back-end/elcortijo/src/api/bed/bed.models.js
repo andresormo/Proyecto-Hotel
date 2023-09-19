@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const bedSchema= new mongoose.Schema(
     {
-        type:{type:String, required:true, unique: true}
+        type:{type:String, required:true, unique: true},
+        maxCapacity: {type:Number, required:true}
     },
     {
         timestamps: true,

@@ -5,7 +5,7 @@ const routerBed = require("express").Router();
 
 routerBed.get("/", getAllBed);
 routerBed.get("/bed/:id", getBedById);
-routerBed.post("/",[isAdmin], createBed);
-routerBed.delete("/:id",[isAdmin], deleteBed);
+routerBed.post("/", createBed);
+routerBed.delete("/:id", deleteBed);
 
 module.exports = routerBed;

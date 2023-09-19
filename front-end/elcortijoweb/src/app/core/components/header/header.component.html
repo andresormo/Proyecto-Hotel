@@ -1,9 +1,9 @@
 <div class="navbar">
   <a class="item" [routerLink]="['home']">
   Home</a>
-  <a class="item" [routerLink]="['booking']">
+  <a class="item" *ngIf="isUserRol" [routerLink]="['booking']">
   Reserva</a>
-  <a class="item" [routerLink]="['mycount']">
+  <a class="item"  [routerLink]="['mycount']">
   Mi Cuenta</a>
   <a class="item" *ngIf="!isLogged" [routerLink]="['login']">Login</a>
   <button class="item" *ngIf="isLogged" (click)="logOut()">LogOut</button>

@@ -1,0 +1,38 @@
+
+<div>
+  <form
+  [formGroup]="roomForm"
+  (ngSubmit)="submitForm()"
+  >
+
+    <label for="description">Descripción:</label>
+    <textarea formControlName="description" required></textarea>
+
+    <h2>Tipos de cama(s)</h2>
+    <div formArrayName="beds">
+      <div >
+        <div *ngFor="let bed of beds">
+          <input
+          type="button"
+          [value]="bed.type"
+          (click)="toggleBed(bed._id, bed.maxCapacity)"
+          [class.selected]="arrayBeds.includes(bed._id)"
+          >
+        </div>
+      </div>
+    </div>
+    <label for="capacity" >Capacidad:</label>
+    <input type="number" formControlName="capacity" required min=1 [max]=maxCapacity [(ngModel)]="capacityValue">
+
+    <h2>Imagenes</h2>
+    <div formArrayName="images">
+      <div>
+        <input type="file" formControlName="image" required>
+        <button type="button" >Eliminar</button>
+      </div>
+    </div>
+    <button type="button">Agregar Imagen</button>
+
+    <button type="submit">Guardar</button>
+</form>
+</div>

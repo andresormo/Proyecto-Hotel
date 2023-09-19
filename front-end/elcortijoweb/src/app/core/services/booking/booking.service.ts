@@ -23,7 +23,6 @@ export class BookingService {
 
 //FUNCIONES PARA MANEJAR DATOS DE ENTRADA
   private transformBooking(apiBooking: ApiBooking[]): BookingI[]{
-console.log(apiBooking);
 
     const bookingTransformed = apiBooking.map((booking)=>
       this.transformBookingOne(booking)
