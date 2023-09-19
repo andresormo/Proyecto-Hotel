@@ -1,0 +1,25 @@
+<form *ngIf="bookingForm" [formGroup]="bookingForm" (submit)="handleBooking()">
+  <label for="dateIn">Fecha de entrada: </label>
+  <input type="date" formControlName="dateIn">
+
+  <label for="dateOut">Fecha de salida: </label>
+  <input type="date" formControlName="dateOut">
+
+  <div>
+    <label for="person">Número de huespedes</label>
+    <input type="number" formControlName="persons" min="1" max="4">
+  </div>
+
+
+<div  *ngFor="let room of rooms">
+  {{room.description}}
+  <div *ngFor="let beds of room.beds">
+   Cama(s): {{beds.type}}
+  </div>
+  <input type="radio" formControlName="room" value="{{room._id}}">
+</div>
+
+
+  <button type="submit">Reservar</button>
+</form>
+

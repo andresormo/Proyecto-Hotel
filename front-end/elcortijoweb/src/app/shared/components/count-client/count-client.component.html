@@ -1,0 +1,13 @@
+<div>
+  <span>Adultos: </span>
+  <span >{{adultPerson}}</span>
+  <input type="button"  (click)="addPerson($event, 'adult' )" value="+"/>
+  <input type="button" (click)="quitPerson($event, 'adult')" value="-"/>
+</div>
+
+<div>
+  <span >Niños: </span>
+  <span>{{kidPerson}}</span>
+  <input type="button" (click)="addPerson($event, 'kid')" value="+"/>
+  <input type="button" (click)="quitPerson($event, 'kid')" value="-"/>
+</div>

@@ -1,0 +1,19 @@
+<div>
+  <form
+  *ngIf="loginForm"
+  [formGroup]="loginForm"
+  (submit)="login()">
+    <div>
+      <input type="email" formControlName="email" placeholder="Email">
+    </div>
+    <div>
+      <input type="password" formControlName="password" placeholder="Password">
+
+    </div>
+      <button type="submit">Login</button>
+  </form>
+  <div>
+    <h4>Regístrate si aún no tienes <a [routerLink]="['/register']">cuenta</a></h4>
+  </div>
+</div>
+
