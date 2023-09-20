@@ -13,7 +13,7 @@ import { FormCreateRoomsComponent } from './components/form-create-rooms/form-cr
     FormBookingComponent,
     CountClientComponent,
     FormUserComponent,
-    FormCreateRoomsComponent
+    FormCreateRoomsComponent,
   ],
   imports: [
     CommonModule,

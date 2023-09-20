@@ -1,10 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { max } from 'rxjs';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { BedsService } from 'src/app/core/services/beds/beds.service';
 import { BedI } from 'src/app/core/services/beds/models/bed.interface';
 import { RoomI } from 'src/app/core/services/rooms/models/room.interface';
-import { bedFunctionControl } from './control-beds';
 
 @Component({
   selector: 'app-form-create-rooms',
@@ -18,40 +22,48 @@ export class FormCreateRoomsComponent implements OnInit {
   public arrayBeds: string[] = [];
   public maxCapacity: number = 0;
   public capacityValue: number = 0;
-  public formSucces:boolean = false;
+  public formSucces: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private bedService: BedsService
-    ) {
+  constructor(private fb: FormBuilder, private bedService: BedsService) {
     this.roomForm = this.fb.group({
-      capacity: new FormControl(this.rooms?.capacity || '', [Validators.required]),
+      capacity: new FormControl(this.rooms?.capacity || '', [
+        Validators.required,
+      ]),
       description: new FormControl(this.rooms?.description || ''),
       beds: this.fb.array([]),
-      images:  this.fb.array([])
+      images: this.fb.array([]),
     });
   }
 
   ngOnInit(): void {
-    this.bedService.getAllBeds().subscribe((bed: BedI[])=> {
-      this.beds = bed
-    })
+    this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
+      this.beds = bed;
+    });
   }
   get bedArray() {
     return this.roomForm.get('beds') as FormArray;
   }
 
-  public toggleBed(bedId:string, max:number ){
-   bedFunctionControl(
-    bedId,
-    max,
-    this.formSucces,
-    this.roomForm,
-    this.fb,
-    this.arrayBeds,
-    this.capacityValue,
-    this.maxCapacity
-    )
+  public toggleBed( bedId: string, max: number,) {
+    const index = this.arrayBeds.indexOf(bedId);
+
+    if (index !== -1) {
+      this.arrayBeds.splice(index, 1);
+      this.maxCapacity -= max;
+      this.capacityValue = this.maxCapacity
+    } else {
+      this.arrayBeds.push(bedId);
+      this.maxCapacity += max;
+      this.capacityValue = this.maxCapacity
+    }
+
+    if (this.maxCapacity >= this.capacityValue) {
+      const bedControls = this.arrayBeds.map((bedId) => this.fb.control(bedId));
+      this.roomForm.setControl('beds', this.fb.array(bedControls));
+      this.formSucces = true;
+    } else {
+      this.formSucces = false;
+    }
   }
 
   submitForm() {
