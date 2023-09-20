@@ -1,5 +1,9 @@
 <div>
-  <form [formGroup]="roomForm" (ngSubmit)="submitForm()">
+  <form
+  [formGroup]="roomForm"
+  (ngSubmit)="submitForm()"
+
+  >
     <label for="description">Descripción:</label>
     <textarea formControlName="description" required></textarea>
 
@@ -25,8 +29,10 @@
           />
         </div>
     </div>
-    <label for="capacity">Capacidad:</label>
-    <input
+
+    <div>
+      <label for="capacity">Capacidad:</label>
+      <input
       type="number"
       formControlName="capacity"
       required
@@ -34,15 +40,19 @@
       [max]="maxCapacity"
       [(ngModel)]="capacityValue"
     />
+    </div>
 
     <h2>Imagenes</h2>
-    <div formArrayName="images">
+    <div>
       <div>
-        <input type="file" formControlName="image" required />
+        <input type="file" formControlName="image" (change)="onfileSelectImg($event)" />
+        <!-- <div *ngFor="let img of arrayimg">
+          <img src="{{img}}" alt="">
+        </div> -->
         <button type="button">Eliminar</button>
       </div>
     </div>
-    <button type="button">Agregar Imagen</button>
+
 
     <button type="submit">Guardar</button>
   </form>

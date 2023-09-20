@@ -2,7 +2,7 @@ import { UserI } from './../../../core/services/user-auth/models/user.model';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserAuthService } from 'src/app/core/services/user-auth/user-auth.service';
-import { formDataFunction, initForm, onFileSelectedFunction } from './models/function-user-form';
+import { formDataFunction, initForm, onFileSelectedFunction } from '../models/function-user-form';
 
 @Component({
   selector: 'app-form-user',
@@ -25,6 +25,8 @@ export class FormUserComponent{
   public handleUser(): void{
     this.formData = formDataFunction(this.registerForm)
     if(this.registerForm?.valid){
+      console.log(this.registerForm.value);
+
       this.createuser()
     }
   }
