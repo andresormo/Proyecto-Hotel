@@ -23,7 +23,7 @@ export class FormCreateRoomsComponent implements OnInit {
   public maxCapacity: number = 0;
   public capacityValue: number = 0;
   public formSucces: boolean = false;
-
+  public bedCounts: { [bedId: string]: number } = {};
   constructor(private fb: FormBuilder, private bedService: BedsService) {
     this.roomForm = this.fb.group({
       capacity: new FormControl(this.rooms?.capacity || '', [
@@ -44,17 +44,19 @@ export class FormCreateRoomsComponent implements OnInit {
     return this.roomForm.get('beds') as FormArray;
   }
 
-  public toggleBed( bedId: string, max: number,) {
+  public toggleBed( bedId: string, max: number, name: string,) {
     const index = this.arrayBeds.indexOf(bedId);
 
-    if (index !== -1) {
+    if (index !== -1 && name === "remove") {
       this.arrayBeds.splice(index, 1);
       this.maxCapacity -= max;
-      this.capacityValue = this.maxCapacity
-    } else {
+      this.capacityValue = this.maxCapacity;
+      this.bedCounts[bedId] = (this.bedCounts[bedId] || 0) - 1;
+    } else if( name === "add"){
       this.arrayBeds.push(bedId);
       this.maxCapacity += max;
-      this.capacityValue = this.maxCapacity
+      this.capacityValue = this.maxCapacity;
+      this.bedCounts[bedId] = (this.bedCounts[bedId] || 0) + 1;
     }
 
     if (this.maxCapacity >= this.capacityValue) {
@@ -64,6 +66,7 @@ export class FormCreateRoomsComponent implements OnInit {
     } else {
       this.formSucces = false;
     }
+
   }
 
   submitForm() {
