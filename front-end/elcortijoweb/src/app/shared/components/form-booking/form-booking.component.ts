@@ -37,6 +37,7 @@ export class FormBookingComponent implements OnInit {
   ngOnInit(): void {
     this.roomService.getAllRoom().subscribe((room: RoomI[]) => {
       this.rooms = room;
+
     });
 
     this.initForm();

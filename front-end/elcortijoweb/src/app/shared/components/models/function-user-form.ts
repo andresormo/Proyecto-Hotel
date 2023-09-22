@@ -2,7 +2,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { UserI } from "src/app/core/services/user-auth/models/user.model";
 
 
-
 export function initForm(element: UserI | undefined, builder:FormBuilder): FormGroup{
   const passwordPattern = new RegExp(/(?=.*\d).{6,}/);
 
