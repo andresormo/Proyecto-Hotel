@@ -1,75 +1,88 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BedsService } from 'src/app/core/services/beds/beds.service';
 import { BedI } from 'src/app/core/services/beds/models/bed.interface';
 import { RoomI } from 'src/app/core/services/rooms/models/room.interface';
+import { RoomService } from 'src/app/core/services/rooms/room.service';
+import {
+  formDataRecovery,
+  initFormRoom,
+  onFileSelectedFunction,
+  toggleBedfunction,
+} from '../models/function-user-form';
 
 @Component({
   selector: 'app-form-create-rooms',
   templateUrl: './form-create-rooms.component.html',
   styleUrls: ['./form-create-rooms.component.scss'],
 })
-export class FormCreateRoomsComponent implements OnInit {
-  @Input() rooms?: RoomI;
-  public roomForm: FormGroup;
+export class FormCreateRoomsComponent{
+  public roomForm?: FormGroup;
+  public formData?: FormData;
+
+  public rooms?: RoomI;
   public beds?: BedI[];
   public arrayBeds: string[] = [];
+  public arrayimg: File[] = [];
+  public bedCounts: { [bedId: string]: number } = {};
+
   public maxCapacity: number = 0;
   public capacityValue: number = 0;
-  public formSucces: boolean = false;
-  public bedCounts: { [bedId: string]: number } = {};
-  constructor(private fb: FormBuilder, private bedService: BedsService) {
-    this.roomForm = this.fb.group({
-      capacity: new FormControl(this.rooms?.capacity || '', [
-        Validators.required,
-      ]),
-      description: new FormControl(this.rooms?.description || ''),
-      beds: this.fb.array([]),
-      images: this.fb.array([]),
-    });
-  }
 
-  ngOnInit(): void {
-    this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
+  public formError: boolean = false;
+  public submitSucces: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private bedService: BedsService,
+    private roomService: RoomService
+  ) {
+      this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
       this.beds = bed;
     });
-  }
-  get bedArray() {
-    return this.roomForm.get('beds') as FormArray;
+    this.roomForm = initFormRoom(this.rooms, fb);
   }
 
-  public toggleBed( bedId: string, max: number, name: string,) {
-    const index = this.arrayBeds.indexOf(bedId);
-
-    if (index !== -1 && name === "remove") {
-      this.arrayBeds.splice(index, 1);
-      this.maxCapacity -= max;
-      this.capacityValue = this.maxCapacity;
-      this.bedCounts[bedId] = (this.bedCounts[bedId] || 0) - 1;
-    } else if( name === "add"){
-      this.arrayBeds.push(bedId);
-      this.maxCapacity += max;
-      this.capacityValue = this.maxCapacity;
-      this.bedCounts[bedId] = (this.bedCounts[bedId] || 0) + 1;
-    }
-
-    if (this.maxCapacity >= this.capacityValue) {
-      const bedControls = this.arrayBeds.map((bedId) => this.fb.control(bedId));
-      this.roomForm.setControl('beds', this.fb.array(bedControls));
-      this.formSucces = true;
+  public submitForm() {
+    this.formData = formDataRecovery(
+      this.roomForm, this.arrayBeds, this.arrayimg
+    );
+    if (this.roomForm?.valid) {
+      this.createRoom();
+      this.resetForm();
+      this.submitSucces = true;
+      this.formError = false;
     } else {
-      this.formSucces = false;
+      this.formError = true;
+      this.submitSucces = false;
     }
+  }
+
+  public createRoom() {
+    this.formData ? this.roomService.createRoom(this.formData).subscribe() : null
+  }
+
+  public resetForm() {
+    this.roomForm?.reset();
+    this.roomForm = initFormRoom(this.rooms, this.fb)
+  }
+
+  public onFileSelectImg(event: Event) {
+    onFileSelectedFunction(event, this.roomForm, this.arrayimg);
+  }
+
+  public toggleBed(bedId: string, max: number, name: string) {
+    this.maxCapacity += max;
+
+    this.capacityValue = toggleBedfunction(
+      bedId, max, name, this.arrayBeds, this.bedCounts
+    );
+
+    this.capacityValue > this.maxCapacity? this.formError= true : this.updateCapacity();
 
   }
 
-  submitForm() {
-    console.log(this.roomForm.value);
+  public updateCapacity() {
+    this.roomForm?.setControl('capacity', this.fb.control(this.capacityValue));
   }
 }

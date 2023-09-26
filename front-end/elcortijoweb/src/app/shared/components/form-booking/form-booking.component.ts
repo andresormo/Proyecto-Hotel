@@ -9,15 +9,15 @@ import {
 import { BookingService } from 'src/app/core/services/booking/booking.service';
 import { BookingI } from 'src/app/core/services/booking/models/booking.interface';
 import { RoomI } from 'src/app/core/services/rooms/models/room.interface';
-import { RoomService } from 'src/app/core/services/rooms/room.service';
 import { UserI } from 'src/app/core/services/user-auth/models/user.model';
+import { RoomService } from 'src/app/core/services/rooms/room.service';
 
 @Component({
   selector: 'app-form-booking',
   templateUrl: './form-booking.component.html',
   styleUrls: ['./form-booking.component.scss'],
 })
-export class FormBookingComponent implements OnInit {
+export class FormBookingComponent {
   @Input() booking?: BookingI;
 
   public rooms?: RoomI[];
@@ -28,37 +28,35 @@ export class FormBookingComponent implements OnInit {
   public hasSuccess: boolean = false;
 
   constructor(
-    private roomService: RoomService,
     private formBuilder: FormBuilder,
     private bookingService: BookingService,
-    private userAuthService: UserAuthService
-  ) {}
-
-  ngOnInit(): void {
-    this.roomService.getAllRoom().subscribe((room: RoomI[]) => {
-      this.rooms = room;
-    });
-
+    private userAuthService: UserAuthService,
+    private roomService: RoomService
+  ) {
     this.initForm();
+    roomService.getAllRoom().subscribe((roomArray: RoomI[])=> this.rooms = roomArray)
   }
 
-
   public handleBooking(){
+    console.log(this.bookingForm?.value);
+
     if(this.bookingForm?.valid){
       this.createBooking();
       this.bookingForm.reset()
     } else{
       this.hasFormError = true
-
     }
   }
   private createBooking(){
     this.hasFormError=false;
     this.bookingService.createBooking(this.bookingForm?.value).subscribe()
-    console.log(this.bookingForm?.value);
-
   }
 
+  public selectRoom(id:string){
+    this.bookingForm?.get('room')?.setValue(id)
+    console.log(id);
+
+  }
   private initForm(){
 
     const userId = this.userAuthService.getUserId()

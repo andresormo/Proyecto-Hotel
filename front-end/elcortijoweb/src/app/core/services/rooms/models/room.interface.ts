@@ -2,6 +2,7 @@ import { BedI } from "../../beds/models/bed.interface"
 
 export interface ApiRoom{
   _id:string,
+  name:string,
   images:string[],
   beds:BedI[],
   capacity:number,
@@ -13,6 +14,7 @@ export interface ApiRoom{
 
   export interface RoomI{
     _id:string,
+    name:string,
     images:string[],
     beds:BedI[],
     capacity:number,
