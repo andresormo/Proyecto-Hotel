@@ -1,70 +1,65 @@
-<div>
-  <form *ngIf="roomForm" [formGroup]="roomForm" (submit)="submitForm()" enctype="multipart/form-data">
-    <div>
-      <h2>Nombre de la habitación</h2>
-      <input
-        type="text"
-        formControlName="name"
-        placeholder="Nombre de la habitación.."
-      />
-    </div>
+<form
+  *ngIf="roomForm"
+  [formGroup]="roomForm"
+  (submit)="submitForm()"
+  enctype="multipart/form-data"
+  class="form"
+>
+  <input
+    type="text"
+    formControlName="name"
+    placeholder="Nombre de la habitación.."
+  />
 
-    <div>
-      <h2>Tipos de cama(s)</h2>
-        <div *ngFor="let bedSingle of beds" formArrayName="beds">
-          <span *ngIf="bedCounts[bedSingle._id] > 0">{{ bedCounts[bedSingle._id] }}</span>
-          <input
-            type="button"
-            [value]="bedSingle.type"
-            [class.selected]="arrayBeds.includes(bedSingle._id)"
-          />
-          <input
-            type="button"
-            (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'add')"
-            value="+"
-          />
-          <input
-            type="button"
-            (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'remove')"
-            value="-"
-          />
-        </div>
-    </div>
+  <label>Tipos de cama(s)</label>
+  <div *ngFor="let bedSingle of beds" formArrayName="beds">
+    <span *ngIf="bedCounts[bedSingle._id] > 0">{{
+      bedCounts[bedSingle._id]
+    }}</span>
+    <input
+      type="button"
+      [value]="bedSingle.type"
+      [class.selected]="arrayBeds.includes(bedSingle._id)"
+    />
+    <input
+      type="button"
+      (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'add')"
+      value="+"
+    />
+    <input
+      type="button"
+      (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'remove')"
+      value="-"
+    />
+  </div>
 
-    <div>
-      <h2>Capacidad:</h2>
-      <input
-        type="number"
-        formControlName="capacity"
-        min="1"
-        max="{{capacityValue}}"
-        value="{{capacityValue}}"
-      />
-    </div>
+  <label>Capacidad:</label>
+  <input
+    type="number"
+    formControlName="capacity"
+    min="1"
+    max="{{ capacityValue }}"
+    value="{{ capacityValue }}"
+  />
 
-    <div>
-      <h2 for="description">Descripción:</h2>
-      <textarea formControlName="description" required></textarea>
-    </div>
 
-    <div>
-      <h2>Imagenes</h2>
-              <input
-              type="file"
-              multiple
-              (change)="onFileSelectImg($event)"
-              formArrayName="images"
-            />
-    </div>
+  <textarea formControlName="description" placeholder="Describe la habitación..." required></textarea>
 
-    <div>
-      <p *ngIf="submitSucces" class="control_succes">
-        Habitación creada con éxito!
-      </p>
-      <p *ngIf="formError" class="control_error">
-        Hay errores en el formulario, revísalo
-      </p>
-    </div>
-    <button type="submit">Guardar</button>
-  </form>
-</div>
+  <label>Imagenes</label>
+  <input
+    type="file"
+    multiple
+    (change)="onFileSelectImg($event)"
+    formArrayName="images"
+  />
+
+  <div>
+    <p *ngIf="submitSucces" class="control_succes">
+      Habitación creada con éxito!
+    </p>
+    <p *ngIf="formError" class="control_error">
+      Hay errores en el formulario, revísalo
+    </p>
+  </div>
+  <button type="submit">Guardar</button>
+</form>

@@ -1,19 +1,6 @@
 
-<section>
+<section class="section">
   <h3>Nueva reserva</h3>
   <app-form-booking></app-form-booking>
-  <div  *ngFor="let room of rooms">
-    <h4>{{room.description}}</h4>
-
-    <div >
-      <h4>Camas</h4>
-      <span *ngFor="let beds of room.beds">{{beds.type}}</span>
-    </div>
-    <input type="radio" formControlName="room" value="{{room._id}}">
-
-    <div *ngFor="let room of room.images">
-      <img  src="{{room}}" alt="">
-    </div>
-  </div>
 </section>
 

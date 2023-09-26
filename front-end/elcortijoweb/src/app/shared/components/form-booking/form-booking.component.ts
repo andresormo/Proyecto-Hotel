@@ -10,6 +10,7 @@ import { BookingService } from 'src/app/core/services/booking/booking.service';
 import { BookingI } from 'src/app/core/services/booking/models/booking.interface';
 import { RoomI } from 'src/app/core/services/rooms/models/room.interface';
 import { UserI } from 'src/app/core/services/user-auth/models/user.model';
+import { RoomService } from 'src/app/core/services/rooms/room.service';
 
 @Component({
   selector: 'app-form-booking',
@@ -29,12 +30,16 @@ export class FormBookingComponent {
   constructor(
     private formBuilder: FormBuilder,
     private bookingService: BookingService,
-    private userAuthService: UserAuthService
+    private userAuthService: UserAuthService,
+    private roomService: RoomService
   ) {
     this.initForm();
+    roomService.getAllRoom().subscribe((roomArray: RoomI[])=> this.rooms = roomArray)
   }
 
   public handleBooking(){
+    console.log(this.bookingForm?.value);
+
     if(this.bookingForm?.valid){
       this.createBooking();
       this.bookingForm.reset()
@@ -45,10 +50,13 @@ export class FormBookingComponent {
   private createBooking(){
     this.hasFormError=false;
     this.bookingService.createBooking(this.bookingForm?.value).subscribe()
-    console.log(this.bookingForm?.value);
-
   }
 
+  public selectRoom(id:string){
+    this.bookingForm?.get('room')?.setValue(id)
+    console.log(id);
+
+  }
   private initForm(){
 
     const userId = this.userAuthService.getUserId()
