@@ -23,6 +23,8 @@ export class RoomService {
   public createRoom(body: FormData): Observable<RoomI>{
     return this.roomService.createApiRoom(body)
   }
-
+  public deleteRoom(id:string): Observable<RoomI>{
+    return this.roomService.deleteApiRoom(id);
+  }
 
 }

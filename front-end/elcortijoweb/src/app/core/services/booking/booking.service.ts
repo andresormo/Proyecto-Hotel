@@ -21,6 +21,10 @@ export class BookingService {
     return this.apiBookingServive.createBooking(body).pipe(map((apiBooking)=>this.transformBookingOne(apiBooking)))
   }
 
+  public deleteBooking(id: string): Observable<BookingI>{
+    return this.apiBookingServive.deleteApiBooking(id)
+  }
+
 //FUNCIONES PARA MANEJAR DATOS DE ENTRADA
   private transformBooking(apiBooking: ApiBooking[]): BookingI[]{
 

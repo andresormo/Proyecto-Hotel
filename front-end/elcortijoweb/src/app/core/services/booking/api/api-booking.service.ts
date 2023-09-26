@@ -31,4 +31,8 @@ public updateBooking(body:FormData, id:string): Observable<ApiBooking>{
   return this.http.put<ApiBooking>(`${API_URL}/booking/update/${id}`, body)
 }
 
+public deleteApiBooking(id:string): Observable<ApiBooking>{
+  return this.http.delete<ApiBooking>(`${API_URL}/booking/delete/${id}`)
+}
+
 }

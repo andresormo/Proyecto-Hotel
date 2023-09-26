@@ -11,19 +11,6 @@
   </div>
 
 
-<div  *ngFor="let room of rooms">
-  {{room.description}}
-  <div *ngFor="let beds of room.beds">
-   Cama(s): {{beds.type}}
-  </div>
-  <input type="radio" formControlName="room" value="{{room._id}}">
-
-  <img *ngFor="let room of room.images" src="{{room}}" alt="">
-</div>
-
-
-
-
   <button type="submit">Reservar</button>
 </form>
 

@@ -9,7 +9,6 @@ import {
 import { BookingService } from 'src/app/core/services/booking/booking.service';
 import { BookingI } from 'src/app/core/services/booking/models/booking.interface';
 import { RoomI } from 'src/app/core/services/rooms/models/room.interface';
-import { RoomService } from 'src/app/core/services/rooms/room.service';
 import { UserI } from 'src/app/core/services/user-auth/models/user.model';
 
 @Component({
@@ -17,7 +16,7 @@ import { UserI } from 'src/app/core/services/user-auth/models/user.model';
   templateUrl: './form-booking.component.html',
   styleUrls: ['./form-booking.component.scss'],
 })
-export class FormBookingComponent implements OnInit {
+export class FormBookingComponent {
   @Input() booking?: BookingI;
 
   public rooms?: RoomI[];
@@ -28,21 +27,12 @@ export class FormBookingComponent implements OnInit {
   public hasSuccess: boolean = false;
 
   constructor(
-    private roomService: RoomService,
     private formBuilder: FormBuilder,
     private bookingService: BookingService,
     private userAuthService: UserAuthService
-  ) {}
-
-  ngOnInit(): void {
-    this.roomService.getAllRoom().subscribe((room: RoomI[]) => {
-      this.rooms = room;
-
-    });
-
+  ) {
     this.initForm();
   }
-
 
   public handleBooking(){
     if(this.bookingForm?.valid){
@@ -50,7 +40,6 @@ export class FormBookingComponent implements OnInit {
       this.bookingForm.reset()
     } else{
       this.hasFormError = true
-
     }
   }
   private createBooking(){

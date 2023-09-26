@@ -9,22 +9,27 @@ import { UserAuthService } from 'src/app/core/services/user-auth/user-auth.servi
   templateUrl: './mycount.component.html',
   styleUrls: ['./mycount.component.scss']
 })
-export class MycountComponent implements OnInit {
+export class MycountComponent {
 
   public bookings?: BookingI[];
   public users?: UserI[];
+  public user: string | null;
   public userIsAdmin: boolean = false;
 
   constructor(
     public bookingService: BookingService,
     public userService: UserAuthService
-  ){}
+  ){
+    this.getBooking();
+    this.user = this.userService.isUser()
+  }
 
   public getBooking(){
    this.bookingService.getAllBooking().subscribe((bookings: BookingI[])=>{
     this.bookings = bookings;
    })
   }
+
 
   public formatDate(dateString: Date): string {
     const date = new Date(dateString);
@@ -35,9 +40,5 @@ export class MycountComponent implements OnInit {
     return `${day}/${month}/${year}`;
   }
 
-
-ngOnInit(): void {
-  this.getBooking();
-}
 
 }

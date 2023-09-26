@@ -37,6 +37,7 @@
         type="number"
         formControlName="capacity"
         min="1"
+        max="{{capacityValue}}"
         value="{{capacityValue}}"
       />
     </div>
@@ -51,19 +52,19 @@
               <input
               type="file"
               multiple
-              (change)="onfileSelectImg($event)"
+              (change)="onFileSelectImg($event)"
               formArrayName="images"
             />
     </div>
 
-    <!-- <div>
+    <div>
       <p *ngIf="submitSucces" class="control_succes">
         Habitación creada con éxito!
       </p>
       <p *ngIf="formError" class="control_error">
         Hay errores en el formulario, revísalo
       </p>
-    </div> -->
+    </div>
     <button type="submit">Guardar</button>
   </form>
 </div>

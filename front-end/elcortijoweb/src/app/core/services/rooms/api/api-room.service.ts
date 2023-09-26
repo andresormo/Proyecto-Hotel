@@ -21,4 +21,8 @@ export class ApiRoomService {
   public createApiRoom(body: FormData): Observable<ApiRoom>{
     return this.http.post<ApiRoom>(`${API_URL}/rooms`, body)
   }
+
+  public deleteApiRoom(id: string): Observable<ApiRoom>{
+    return this.http.delete<ApiRoom>(`${API_URL}/rooms/delete/${id}`)
+  }
 }
