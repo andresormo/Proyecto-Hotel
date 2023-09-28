@@ -16,7 +16,7 @@ import {
   templateUrl: './form-create-rooms.component.html',
   styleUrls: ['./form-create-rooms.component.scss'],
 })
-export class FormCreateRoomsComponent{
+export class FormCreateRoomsComponent implements OnInit{
   public roomForm?: FormGroup;
   public formData?: FormData;
 
@@ -36,12 +36,14 @@ export class FormCreateRoomsComponent{
     private fb: FormBuilder,
     private bedService: BedsService,
     private roomService: RoomService
-  ) {
-      this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
-      this.beds = bed;
-    });
-    this.roomForm = initFormRoom(this.rooms, fb);
-  }
+  ) {}
+
+ngOnInit(): void {
+  this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
+    this.beds = bed;
+  });
+  this.roomForm = initFormRoom(this.rooms, this.fb);
+}
 
   public submitForm() {
     this.formData = formDataRecovery(

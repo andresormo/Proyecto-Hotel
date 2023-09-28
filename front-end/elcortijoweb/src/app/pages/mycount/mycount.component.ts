@@ -9,19 +9,21 @@ import { UserAuthService } from 'src/app/core/services/user-auth/user-auth.servi
   templateUrl: './mycount.component.html',
   styleUrls: ['./mycount.component.scss']
 })
-export class MycountComponent {
+export class MycountComponent implements OnInit {
 
   public bookings?: BookingI[];
   public users?: UserI[];
-  public user: string | null;
+  public user?: string | null;
   public userIsAdmin: boolean = false;
 
   constructor(
     public bookingService: BookingService,
     public userService: UserAuthService
-  ){
+  ){}
+
+  ngOnInit(): void {
     this.getBooking();
-    this.user = this.userService.isUser()
+      this.user = this.userService.isUser()
   }
 
   public getBooking(){

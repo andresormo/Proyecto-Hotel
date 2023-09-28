@@ -1,10 +1,21 @@
-<div class="navbar">
-  <a class="item" [routerLink]="['home']">
-  Home</a>
-  <a class="item" [routerLink]="['booking']">
-  Reserva</a>
-  <a class="item"  [routerLink]="['mycount']">
-  Mi Cuenta</a>
-  <a class="item" *ngIf="!isLogged" [routerLink]="['login']">Login</a>
-  <button class="item" *ngIf="isLogged" (click)="logOut()">LogOut</button>
+
+<div class="container mw-100">
+  <div class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">
+        Home</a>
+    </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['booking']" routerLinkActive="active">
+      Reserva</a>
+  </li>
+  <li class="nav-item">
+    <a  class="nav-link" [routerLink]="['mycount']" routerLinkActive="active">
+      Mi Cuenta</a>
+  </li>
+  </div>
+  <div class="nav-item">
+    <button class="btn" *ngIf="!isLogged" [routerLink]="['login']">Login</button>
+    <button class="btn btn--out" *ngIf="isLogged" (click)="logOut()">LogOut</button>
+  </div>
 </div>

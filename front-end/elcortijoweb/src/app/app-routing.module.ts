@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivateFn } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
+  {
+    path:'',
+    redirectTo:'home',
+    pathMatch:'full'
+  },
   {
     path:'home',
     loadChildren: ()=> import('./pages/home/home.module').then((m)=>m.HomeModule)

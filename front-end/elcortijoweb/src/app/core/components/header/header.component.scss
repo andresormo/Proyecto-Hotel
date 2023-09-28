@@ -1,14 +1,29 @@
-.navbar{
-  width: 100%;
-  height: 50px;
-  background-color: rgb(97, 198, 241);
+@import './../../../../styles.scss';
+
+.container{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  margin: 0px;
+  width: 100%;
+}
+a{
+  color: $colorParagraph;
+}
+a:focus{
+  color: $colorButtonText;
 }
 
-.item{
-  text-decoration: none;
-  color: rgb(129, 127, 127);
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+a:hover{
+  color: $colorButtonText;
+}
+
+button.btn {
+  color:$colorHeadline;
+  background-color: $colorButton;
+  border-color: $colorParagraph;
+  &--out {
+    color: $colorTertiary;
+    border-color: $colorTertiary;
+}
 }

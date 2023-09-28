@@ -1,19 +1,37 @@
-<div>
+<div class="w-50">
   <form
   *ngIf="loginForm"
   [formGroup]="loginForm"
   (submit)="login()">
-    <div>
-      <input type="email" formControlName="email" placeholder="Email">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" type="email" formControlName="email" placeholder="Email">
     </div>
-    <div>
-      <input type="password" formControlName="password" placeholder="Password">
+    <div class="mb-3">
+      <label class="form-label">Contraseña</label>
+      <input class="form-control" type="password" formControlName="password" placeholder="Password">
 
     </div>
-      <button type="submit">Login</button>
+      <button class="btn" type="submit">Login</button>
   </form>
   <div>
     <h4>Regístrate si aún no tienes <a [routerLink]="['/register']">cuenta</a></h4>
   </div>
 </div>
 
+<!-- <form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email"  id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form> -->

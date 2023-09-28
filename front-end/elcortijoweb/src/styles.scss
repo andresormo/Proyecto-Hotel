@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+*body{
   margin: 0;
+  width: 100%;
+  padding: 5px;
 }
 .section{
   display: flex;
@@ -14,3 +16,17 @@ body{
   justify-content: center;
   flex-direction: column;
 }
+
+$colorParagraph:#abd1c6;
+$colorBackground:#004643;
+$colorHeadline:#fffffe;
+$colorButtonText:#002e2c;
+$colorButton:#f9bc60;
+
+$colorStroke:#001e1d;
+$colorMain:#e8e4e6;
+$colorHighligth:#f9bc60;
+$colorSecondary: #abd1c6;
+$colorTertiary:#e16162;
+
+
