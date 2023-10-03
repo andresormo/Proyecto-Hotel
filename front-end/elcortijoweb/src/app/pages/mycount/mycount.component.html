@@ -1,10 +1,5 @@
-<section
-*ngIf="bookings"
->
-  <div *ngFor="let booking of bookings">
-    {{ formatDate(booking.dateIn) }}
-    {{ formatDate(booking.dateOut) }}
-    {{booking.user[0].name}}
-  </div>
-<app-admin-profile *ngIf="user"></app-admin-profile>
+<section>
+  <app-admin-profile *ngIf="user==='admin'" [bookingsToShow]="bookings"></app-admin-profile>
 </section>
+
+

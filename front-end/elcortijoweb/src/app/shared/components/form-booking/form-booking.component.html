@@ -1,21 +1,34 @@
-<form *ngIf="bookingForm" [formGroup]="bookingForm" (submit)="handleBooking()" class="form">
-  <label for="dateIn">Fecha de entrada: </label>
-  <input type="date" formControlName="dateIn">
-
-  <label for="dateOut">Fecha de salida: </label>
-  <input type="date" formControlName="dateOut">
-
-  <label for="person">Número de huespedes</label>
-  <input type="number" formControlName="persons" min="1" max="4">
-
-  <div *ngFor="let room of rooms"  class="container_image">
-    <div *ngFor="let roomimg of room.images" class="item_image">
-      <input  type="image" class="img_input" src="{{roomimg}}" formControlName="room" (click)="selectRoom(room._id)">
-      <h4>{{room.description}}</h4>
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <form *ngIf="bookingForm" [formGroup]="bookingForm" (submit)="handleBooking()">
+    <div>
+      <label class="form-label"  for="dateIn">Fecha de entrada: </label>
+      <input class="form-control" type="date" formControlName="dateIn">
     </div>
-  </div>
 
 
-  <button type="submit">Reservar</button>
-</form>
+    <div>
+      <label class="form-label"  for="dateOut">Fecha de salida: </label>
+      <input class="form-control" type="date" formControlName="dateOut">
+    </div>
+
+
+    <div>
+      <label class="form-label"  for="person">Número de huespedes</label>
+      <input class="form-control" type="number" formControlName="persons" min="1" max="4">
+    </div>
+
+
+    <div *ngFor="let room of rooms"  class="container_image">
+      <div class="form-label" *ngFor="let roomimg of room.images" class="item_image">
+        <input class="form-control" type="image" class="img_input" src="{{roomimg}}" formControlName="room" (click)="selectRoom(room._id)">
+        <h4>{{room.description}}</h4>
+      </div>
+    </div>
+
+
+    <button class="btn" type="submit">Reservar</button>
+  </form>
+</div>
+
+
 

@@ -57,7 +57,7 @@ export class UserAuthService {
     const removeToken = localStorage.removeItem(TOKEN_KEY);
     this.isLogged$.next(false);
 
-    if (removeToken != null) {
+    if (removeToken !== null) {
       this.router.navigate(['home']);
     }
   }

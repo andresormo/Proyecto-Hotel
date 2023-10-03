@@ -1,1 +1,43 @@
+<section
+*ngIf="bookingsToShow"
+class="w-100 d-flex aling-items-center flex-column"
+
+>
+<div>
+  <h3>Rango de fechas</h3>
+  <label for="dateIn">Desde</label>
+  <input [(ngModel)]="dateIn" type="date">
+
+  <label for="dataOut">Hasta</label>
+  <input [(ngModel)]="dateOut" type="date">
+</div>
+<div class="m-3 mt-5">
+  <table class="table table-striped w-100 p-10">
+    <thead>
+      <tr >
+        <th class="table-resume--head">Identificador de la reserva</th>
+        <th class="table-resume--head">Nombre del cliente</th>
+        <th class="table-resume--head">Número de huéspedes</th>
+        <th class="table-resume--head">Fecha de entrada</th>
+        <th class="table-resume--head">Fecha de salida</th>
+        <th class="table-resume--head">Más información</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookingsToShow | filterDate: dateIn | dateOut: dateOut">
+        <th scope="row" class="table-resume--body">{{booking._id}}</th>
+        <td class="table-resume--body">{{booking.user[0].name}}</td>
+        <td class="table-resume--body">{{booking.persons}}</td>
+        <td class="table-resume--body">{{ formatDateComponent(booking.dateIn) }}</td>
+        <td class="table-resume--body">{{ formatDateComponent(booking.dateOut) }}</td>
+        <td class="table-resume--body d-flex justify-content-center"><button class="btn btn-table">Detalle de la reserva</button></td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
 <app-form-create-rooms></app-form-create-rooms>
+
+</section>

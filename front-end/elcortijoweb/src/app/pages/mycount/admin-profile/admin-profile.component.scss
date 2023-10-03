@@ -1,0 +1,17 @@
+@import './../../../../styles.scss';
+
+.table-resume{
+  &--head{
+    color: $colorMain;
+    background-color: $colorBackground;
+  }
+  &--body{
+    color: $colorStroke;
+    background-color: $colorMain;
+  }
+}
+
+.btn-table:hover{
+  background-color: $colorButton;
+  color: $colorMain;
+}
