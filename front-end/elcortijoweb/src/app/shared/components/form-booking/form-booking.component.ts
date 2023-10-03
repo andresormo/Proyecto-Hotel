@@ -69,7 +69,7 @@ export class FormBookingComponent {
         Validators.required,
       ]),
       room: new FormControl(this.booking?.room || '', [Validators.required]),
-      persons: new FormControl(this.booking?.person || 1, [
+      persons: new FormControl(this.booking?.persons || 1, [
         Validators.required,
       ]),
     });

@@ -1,57 +1,85 @@
-<form
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <form
   *ngIf="roomForm"
   [formGroup]="roomForm"
   (submit)="submitForm()"
   enctype="multipart/form-data"
-  class="form"
+  class="form w-50"
 >
-  <input
+<div class="mt-3 m-3">
+  <label  class="form-label" for="name">Nombre de la habitación</label>
+  <input class="form-control"
     type="text"
     formControlName="name"
-    placeholder="Nombre de la habitación.."
   />
+</div>
 
-  <label>Tipos de cama(s)</label>
-  <div *ngFor="let bedSingle of beds" formArrayName="beds">
-    <span *ngIf="bedCounts[bedSingle._id] > 0">{{
-      bedCounts[bedSingle._id]
-    }}</span>
-    <input
-      type="button"
-      [value]="bedSingle.type"
-      [class.selected]="arrayBeds.includes(bedSingle._id)"
-    />
-    <input
-      type="button"
-      (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'add')"
-      value="+"
-    />
-    <input
-      type="button"
-      (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'remove')"
-      value="-"
-    />
-  </div>
 
-  <label>Capacidad:</label>
-  <input
+  <div class="w-100 d-flex align-items-center flex-column">
+    <label class="form-label">Tipos de cama(s)</label>
+    <div class="d-flex justify-content-center w-100 align-items-center" *ngFor="let bedSingle of beds" formArrayName="beds">
+      <span class="number-bed" *ngIf="bedCounts[bedSingle._id] || '--' ">{{
+       bedCounts[bedSingle._id] || '--'
+      }}</span>
+      <input class="form-control w-50"
+        type="button"
+        [value]="bedSingle.type"
+        [class.selected]="arrayBeds.includes(bedSingle._id)"
+      />
+      <div class="number-bed">
+        <button class="btn addQuitBed"
+        type="button"
+        (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'add')"
+      >+</button>
+      <button class=" btn addQuitBed"
+        type="button"
+        (click)="toggleBed(bedSingle._id, bedSingle.maxCapacity, 'remove')"
+      >-</button>
+      </div>
+    </div>
+    </div>
+
+<div class="mb-3 mt-3">
+  <label class="form-label">Capacidad</label>
+  <input class="form-control"
     type="number"
     formControlName="capacity"
     min="1"
     max="{{ capacityValue }}"
     value="{{ capacityValue }}"
   />
+</div>
 
 
-  <textarea formControlName="description" placeholder="Describe la habitación..." required></textarea>
+<div class="mb-3 mt-3">
+  <label  class="form-label" for="description">Escribe una descripción</label>
+  <textarea class="form-control" formControlName="description" required></textarea>
+</div>
 
-  <label>Imagenes</label>
-  <input
+
+<div class="mb-3 mt-3 d-flex flex-column">
+
+  <label class="form-label">Imagenes</label>
+
+    <input class="form-control w-100"
     type="file"
+    accept="image/*"
     multiple
     (change)="onFileSelectImg($event)"
     formArrayName="images"
   />
+  <div class="d-flex flex-wrap justify-content-center m-3">
+    <div
+    *ngFor="let base64 of arraybase64, let i = index"
+    class="d-flex flex-column align-items-center">
+     <img class="img-preview" [src]="base64" alt="" >
+     <span class="icon-bin span-bin" (click)="deleteImg(i)"></span>
+   </div>
+  </div>
+  <p *ngIf="ImgError" class="control_error">No puedes incluir más de 10 imágenes</p>
+
+</div>
+
 
   <div>
     <p *ngIf="submitSucces" class="control_succes">
@@ -61,5 +89,7 @@
       Hay errores en el formulario, revísalo
     </p>
   </div>
-  <button type="submit">Guardar</button>
+  <button class="btn" type="submit">Guardar</button>
 </form>
+</div>
+

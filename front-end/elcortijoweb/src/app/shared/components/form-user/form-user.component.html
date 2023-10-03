@@ -1,32 +1,39 @@
-<form
-*ngIf="registerForm"
-[formGroup]="registerForm"
-(submit)="handleUser()"
-enctype="multipart/form-data"
->
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <form
+  *ngIf="registerForm"
+  [formGroup]="registerForm"
+  (submit)="handleUser()"
+  enctype="multipart/form-data"
+  >
   <div>
-    <label for="name">Nombre</label>
-    <input type="text" formControlName="name">
+    <div>
+      <label class="form-label" for="name">Nombre</label>
+      <input class="form-control" type="text" formControlName="name">
+    </div>
+    <div>
+      <label class="form-label" for="surname">Apellidos</label>
+      <input class="form-control" type="text" formControlName="surname">
+    </div>
+    <div>
+      <label class="form-label" for="image">Foto de perfil</label>
+      <input class="form-control" type="file"
+      (change)="onFileSelected($event)"
+      formControlName="image">
+    </div>
+    <div>
+      <label class="form-label" for="email">Email</label>
+      <input class="form-control" type="email" formControlName="email">
+    </div>
+    <div>
+      <label class="form-label" for="password">Contraseña</label>
+      <input class="form-control" type="password" formControlName="password">
+    </div>
   </div>
-  <div>
-    <label for="surname">Apellidos</label>
-    <input type="text" formControlName="surname">
-  </div>
-  <div>
-    <label for="image">Foto de perfil</label>
-    <input type="file"
-    (change)="onFileSelected($event)"
-    formControlName="image">
-  </div>
-  <div>
-    <label for="email">Email</label>
-    <input type="email" formControlName="email">
-  </div>
-  <div>
-    <label for="password">Contraseña</label>
-    <input type="password" formControlName="password">
-  </div>
-  <div>
-    <button type="submit">Crear usuario</button>
-  </div>
-</form>
+
+    <div class="mt-2">
+      <button class="btn" type="submit">Crear usuario</button>
+    </div>
+  </form>
+</div>
+
+

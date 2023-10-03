@@ -8,6 +8,7 @@ import { UserI } from "src/app/core/services/user-auth/models/user.model";
 let capacity: number = 0;
 let maxCapacity: number = 0;
 
+
 // FORMULARIO DE USUARIOS
 export function initForm(element: UserI | undefined, builder:FormBuilder): FormGroup{
   const passwordPattern = new RegExp(/(?=.*\d).{6,}/);
@@ -33,15 +34,28 @@ export function formDataFunction(form?:FormGroup): FormData{
 }
 
 //FUNCION PARA SELECCIONAR LOS FILES DE LAS IMAGENES
+let  arrayBase64function:string[]=[];
 
-export function onFileSelectedFunction(event:Event, form?: FormGroup, arrayimg?: File[]){
+
+export function onFileSelectedFunction(event:Event, form?: FormGroup, arrayimg?: File[], arraybase64Component?:string[]){
   const target = event.target as HTMLInputElement;
   if(target.files && target.files.length){
+    let base64Image: string;
     const file = target.files[0];
+    const reader = new FileReader();
+      reader.onload = () => {
+        base64Image = reader.result as string;
+        arrayBase64function.push(base64Image)
+      };
+      reader.readAsDataURL(file);
     if(arrayimg){
       arrayimg.push(file);
     } else form?.get('image')?.setValue(file)
   }
+  if(arraybase64Component){
+    arrayBase64function = arraybase64Component
+  }
+  return arraybase64Component
 }
 
 // FORMULARIO DE HABITACIONES

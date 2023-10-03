@@ -1,19 +1,21 @@
-<div>
+<div class="d-flex flex-column justify-content-center align-items-center">
   <form
   *ngIf="loginForm"
   [formGroup]="loginForm"
   (submit)="login()">
-    <div>
-      <input type="email" formControlName="email" placeholder="Email">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" type="email" formControlName="email" placeholder="Email">
     </div>
-    <div>
-      <input type="password" formControlName="password" placeholder="Password">
+    <div class="mb-3">
+      <label class="form-label">Contraseña</label>
+      <input class="form-control" type="password" formControlName="password" placeholder="Password">
 
     </div>
-      <button type="submit">Login</button>
+      <button class="btn" type="submit">Login</button>
   </form>
   <div>
-    <h4>Regístrate si aún no tienes <a [routerLink]="['/register']">cuenta</a></h4>
+    <h4 class="fw-lighter fs-6">Regístrate si aún no tienes <a  class="text-decoration-none" [routerLink]="['/register']">cuenta</a></h4>
   </div>
 </div>
 

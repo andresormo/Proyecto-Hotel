@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BedsService } from 'src/app/core/services/beds/beds.service';
 import { BedI } from 'src/app/core/services/beds/models/bed.interface';
@@ -16,7 +16,7 @@ import {
   templateUrl: './form-create-rooms.component.html',
   styleUrls: ['./form-create-rooms.component.scss'],
 })
-export class FormCreateRoomsComponent{
+export class FormCreateRoomsComponent implements OnInit{
   public roomForm?: FormGroup;
   public formData?: FormData;
 
@@ -24,6 +24,7 @@ export class FormCreateRoomsComponent{
   public beds?: BedI[];
   public arrayBeds: string[] = [];
   public arrayimg: File[] = [];
+  public arraybase64: string[]= [];
   public bedCounts: { [bedId: string]: number } = {};
 
   public maxCapacity: number = 0;
@@ -31,17 +32,20 @@ export class FormCreateRoomsComponent{
 
   public formError: boolean = false;
   public submitSucces: boolean = false;
+  public ImgError: boolean= false;
 
   constructor(
     private fb: FormBuilder,
     private bedService: BedsService,
     private roomService: RoomService
-  ) {
-      this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
-      this.beds = bed;
-    });
-    this.roomForm = initFormRoom(this.rooms, fb);
-  }
+  ) {}
+
+ngOnInit(): void {
+  this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
+    this.beds = bed;
+  });
+  this.roomForm = initFormRoom(this.rooms, this.fb);
+}
 
   public submitForm() {
     this.formData = formDataRecovery(
@@ -64,12 +68,22 @@ export class FormCreateRoomsComponent{
 
   public resetForm() {
     this.roomForm?.reset();
-    this.roomForm = initFormRoom(this.rooms, this.fb)
+    this.arrayBeds =[];
+    this.arrayimg= [];
+    this.arraybase64=[];
+    this.bedCounts={}
+
   }
 
   public onFileSelectImg(event: Event) {
-    onFileSelectedFunction(event, this.roomForm, this.arrayimg);
+      onFileSelectedFunction(event, this.roomForm, this.arrayimg, this.arraybase64);
+
+      if(this.arraybase64.length > 9){
+        this.ImgError = true
+        this.formError= true
+      }
   }
+
 
   public toggleBed(bedId: string, max: number, name: string) {
     this.maxCapacity += max;
@@ -79,10 +93,13 @@ export class FormCreateRoomsComponent{
     );
 
     this.capacityValue > this.maxCapacity? this.formError= true : this.updateCapacity();
-
   }
 
   public updateCapacity() {
     this.roomForm?.setControl('capacity', this.fb.control(this.capacityValue));
+  }
+
+  public deleteImg(index:number){
+    this.arraybase64.splice(index, 1)
   }
 }

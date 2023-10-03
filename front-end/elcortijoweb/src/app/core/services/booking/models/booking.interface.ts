@@ -8,7 +8,7 @@ export interface ApiBooking{
   dateIn: Date,
   dateOut:Date,
   room:ApiRoom[],
-  person:number,
+  persons:number,
   ceatedAt?:Date,
   updateUp?:Date,
   __v?:number
@@ -21,5 +21,5 @@ export interface BookingI{
   dateIn: Date,
   dateOut:Date,
   room:ApiRoom[],
-  person:number
+  persons:number
 }

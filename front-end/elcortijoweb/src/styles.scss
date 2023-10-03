@@ -1,16 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+$colorParagraph:#abd1c6;
+$colorBackground:#004643;
+$colorHeadline:#fffffe;
+$colorButtonText:#002e2c;
+$colorButton:#f9bc60;
+
+$colorStroke:#001e1d;
+$colorMain:#e8e4e6;
+$colorHighligth:#f9bc60;
+$colorSecondary: #abd1c6;
+$colorTertiary:#e16162;
+
+
 body{
   margin: 0;
+  width: 100%;
+  padding: 2px;
 }
 .section{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.form{
+form{
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  border: 1px rgb(233, 233, 233) solid;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 1px 1px 1px 1px rgb(216, 216, 216) ;
+  margin: 5px;
 }
+
+button{
+  transition: 0.5s;
+  background-color: $colorButton;
+  color: $colorHeadline;
+}
+
+button:hover{
+  transition: 0.5s;
+  box-shadow: 1px 1px 1px 1px $colorBackground;
+  color: $colorButton;
+}
+
+button:active{
+  transition: 0.5s;
+  box-shadow: 0px 0px 1px 1px inset $colorBackground;
+}
+
+
+
+
