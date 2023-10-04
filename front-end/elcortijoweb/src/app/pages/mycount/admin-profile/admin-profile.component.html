@@ -6,10 +6,10 @@ class="w-100 d-flex aling-items-center flex-column"
 <div>
   <h3>Rango de fechas</h3>
   <label for="dateIn">Desde</label>
-  <input [(ngModel)]="dateIn" type="date">
+  <input [(ngModel)]="dateIn" type="date" name="dateIn">
 
-  <label for="dataOut">Hasta</label>
-  <input [(ngModel)]="dateOut" type="date">
+  <label for="dateOut">Hasta</label>
+  <input [(ngModel)]="dateOut" type="date" name="dateOut">
 </div>
 <div class="m-3 mt-5">
   <table class="table table-striped w-100 p-10">
@@ -24,7 +24,7 @@ class="w-100 d-flex aling-items-center flex-column"
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let booking of bookingsToShow | filterDate: dateIn | dateOut: dateOut">
+      <tr *ngFor="let booking of bookingsToShow | filterDate: dateIn : dateOut">
         <th scope="row" class="table-resume--body">{{booking._id}}</th>
         <td class="table-resume--body">{{booking.user[0].name}}</td>
         <td class="table-resume--body">{{booking.persons}}</td>

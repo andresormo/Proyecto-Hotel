@@ -10,17 +10,19 @@ import { formatDateFunction } from '../functions/functios';
 export class AdminProfileComponent{
   @Input() public bookingsToShow?: BookingI[];
 
-  public dateIn: Date;
-  public dateOut: Date;
+  public dateIn: Date = new Date();
+  public dateOut?: Date;
 
   constructor(){
-    this.dateIn = new Date();
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 7);
-    this.dateOut = nextWeek;
+    this.addDaysAtDate();
   }
 
 
+  public addDaysAtDate(){
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 14);
+    this.dateOut = nextWeek;
+  }
   public formatDateComponent(date:Date){
     return formatDateFunction(date);
   }

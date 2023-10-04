@@ -5,8 +5,7 @@ import { CountClientComponent } from './components/count-client/count-client.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormUserComponent } from './components/form-user/form-user.component';
 import { FormCreateRoomsComponent } from './components/form-create-rooms/form-create-rooms.component';
-import { DateInPipe } from './pipes/filterDate/filterDateIn/dateIn.pipe';
-import { DateOutPipe } from './pipes/filterDate/filterDateOut/date-out.pipe';
+import { DateInPipe } from './pipes/filterDate/dateIn.pipe';
 
 
 
@@ -16,8 +15,7 @@ import { DateOutPipe } from './pipes/filterDate/filterDateOut/date-out.pipe';
     CountClientComponent,
     FormUserComponent,
     FormCreateRoomsComponent,
-    DateInPipe,
-    DateOutPipe,
+    DateInPipe
   ],
   imports: [
     CommonModule,
@@ -28,8 +26,7 @@ import { DateOutPipe } from './pipes/filterDate/filterDateOut/date-out.pipe';
     FormBookingComponent,
     FormUserComponent,
     FormCreateRoomsComponent,
-    DateInPipe,
-    DateOutPipe
+    DateInPipe
   ]
 })
 export class SharedModule { }
