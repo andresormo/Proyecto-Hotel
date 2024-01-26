@@ -19,7 +19,9 @@ export class MycountComponent implements OnInit {
   constructor(
     public bookingService: BookingService,
     public userService: UserAuthService
-  ){}
+  ){
+    scroll(screenTop, 0)
+  }
 
   ngOnInit(): void {
     this.getBooking();

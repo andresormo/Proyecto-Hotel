@@ -1,5 +1,8 @@
-<div class="d-flex flex-column justify-content-center align-items-center">
-  <form *ngIf="bookingForm" [formGroup]="bookingForm" (submit)="handleBooking()">
+<!-- <div class="d-flex flex-column justify-content-center align-items-center w-75">
+  <form class="d-flex flex-column justify-content-center align-items-center w-75"
+  *ngIf="bookingForm"
+  [formGroup]="bookingForm"
+  (submit)="handleBooking()">
     <div>
       <label class="form-label"  for="dateIn">Fecha de entrada: </label>
       <input class="form-control" type="date" formControlName="dateIn">
@@ -18,9 +21,10 @@
     </div>
 
 
-    <div *ngFor="let room of rooms"  class="container_image">
+    <div *ngFor="let room of rooms"  class="container_image ">
       <div class="form-label" *ngFor="let roomimg of room.images" class="item_image">
-        <input class="form-control" type="image" class="img_input" src="{{roomimg}}" formControlName="room" (click)="selectRoom(room._id)">
+        <img src="{{roomimg}}" alt="" (click)="selectRoom(room._id)">
+
         <h4>{{room.description}}</h4>
       </div>
     </div>
@@ -28,7 +32,7 @@
 
     <button class="btn" type="submit">Reservar</button>
   </form>
-</div>
+</div> -->
 
 
 

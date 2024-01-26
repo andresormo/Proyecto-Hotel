@@ -17,7 +17,7 @@ export class BookingService {
     return this.apiBookingServive.getApiBooking().pipe(map((apiBooking: ApiBooking[])=> this.transformBooking(apiBooking)))
   }
 
-  public createBooking(body: FormData): Observable<BookingI>{
+  public createBooking(body: BookingI): Observable<BookingI>{
     return this.apiBookingServive.createBooking(body).pipe(map((apiBooking)=>this.transformBookingOne(apiBooking)))
   }
 

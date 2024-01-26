@@ -7,8 +7,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DateInPipe implements PipeTransform {
   transform(
     value: BookingI[],
-    filterDateIn: Date,
-    filterDateOut?: Date
+    filterDateIn?: Date,
+    filterDateOut?: Date,
+    filterId?: string
   ): BookingI[] {
     const bookingFilter: BookingI[] = [];
 
@@ -33,6 +34,13 @@ export class DateInPipe implements PipeTransform {
         }
       }
     }
+    if(filterId){
+      return bookingFilter.filter(booking=>{
+        return booking._id.toLowerCase().includes(filterId.toLowerCase())
+      })
+
+    }
+
     return bookingFilter;
   }
 }

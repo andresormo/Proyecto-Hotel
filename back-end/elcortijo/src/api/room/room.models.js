@@ -7,6 +7,7 @@ const roomSchema = new mongoose.Schema(
         capacity:{type: Number },
         description:{type: String },
         images:[{type:String}],
+        price:{type: Number}
     },
     
     {

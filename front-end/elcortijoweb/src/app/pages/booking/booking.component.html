@@ -1,6 +1,20 @@
-
-<section class="section">
-  <h3>Nueva reserva</h3>
-  <app-form-booking></app-form-booking>
+<section *ngIf="!confirmComponent" class="container">
+  <!-- Cuando abrimos la pagina de reservas lo primero que encontramos
+    es un formulario(el cual tenemos en el componente form-pre-booking en Shared)
+    para hacer la prereserva
+   -->
+  <h3 class="text-center h-25">Nueva reserva</h3>
+  <app-form-pre-booking (openConfirmComponent)="getConfirm($event)" ></app-form-pre-booking>
 </section>
+
+
+
+<!-- una vez tenemos la preserva y la confirmacion para abrir el siguiente componenre
+podemos lanzar el confirm-booking para finalizar la reserva o editarla en caso de error -->
+
+<section *ngIf="confirmComponent">
+
+  <app-confirm-booking  (editBookingRes)="editBooking($event)"></app-confirm-booking>
+</section>
+
 

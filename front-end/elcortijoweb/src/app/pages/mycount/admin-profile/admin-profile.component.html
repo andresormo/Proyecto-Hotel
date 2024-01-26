@@ -1,43 +1,104 @@
-<section
-*ngIf="bookingsToShow"
-class="w-100 d-flex aling-items-center flex-column"
+<section *ngIf="bookingsToShow" class="container container--search-booking">
+  <div class="form search-filter d-flex flex-column align-items-center">
+    <h4 class="text-center">Buscador de reservas</h4>
+    <div class="mb-3 w-75 d-flex justify-content-around flex-wrap">
+      <div class="w-75 d-flex flex-wrap ">
+          <label class="form-label mb-0" for="dateIn">Desde</label>
+          <input
+            class="form-control ms-1 text-center"
+            [(ngModel)]="dateIn"
+            type="date"
+            name="dateIn"
+          />
 
->
-<div>
-  <h3>Rango de fechas</h3>
-  <label for="dateIn">Desde</label>
-  <input [(ngModel)]="dateIn" type="date" name="dateIn">
+          <label class="form-label mb-0 ms-1" for="dateOut">Hasta</label>
+          <input
+            class="form-control ms-1 text-center"
+            [(ngModel)]="dateOut"
+            type="date"
+            name="dateOut"
+          />
 
-  <label for="dateOut">Hasta</label>
-  <input [(ngModel)]="dateOut" type="date" name="dateOut">
-</div>
-<div class="m-3 mt-5">
-  <table class="table table-striped w-100 p-10">
-    <thead>
-      <tr >
-        <th class="table-resume--head">Identificador de la reserva</th>
-        <th class="table-resume--head">Nombre del cliente</th>
-        <th class="table-resume--head">Número de huéspedes</th>
-        <th class="table-resume--head">Fecha de entrada</th>
-        <th class="table-resume--head">Fecha de salida</th>
-        <th class="table-resume--head">Más información</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let booking of bookingsToShow | filterDate: dateIn : dateOut">
-        <th scope="row" class="table-resume--body">{{booking._id}}</th>
-        <td class="table-resume--body">{{booking.user[0].name}}</td>
-        <td class="table-resume--body">{{booking.persons}}</td>
-        <td class="table-resume--body">{{ formatDateComponent(booking.dateIn) }}</td>
-        <td class="table-resume--body">{{ formatDateComponent(booking.dateOut) }}</td>
-        <td class="table-resume--body d-flex justify-content-center"><button class="btn btn-table">Detalle de la reserva</button></td>
-
-      </tr>
-    </tbody>
-  </table>
-</div>
+          <div class="d-flex justify-content-center w-100 btn-admin-container">
+            <button
+              class="btn mt-1 btn-admin-pro btn-admin-pro--clean-date"
+              (click)="resetInput('dateIn')"
+            >
+              Limpiar
+            </button>
+          </div>
+      </div>
 
 
-<app-form-create-rooms></app-form-create-rooms>
+        <div class="w-75 d-flex align-items-center flex-wrap btn-admin-container">
+          <label class="form-label mb-0 ms-1">Id de reserva</label>
+          <input class="form-control ms-1" type="text" [(ngModel)]="idValue" />
 
+            <button
+              class="btn mt-1 btn-admin-pro btn-admin-pro--clean-id"
+              (click)="resetInput('id')"
+            >
+              X
+            </button>
+
+        </div>
+
+    </div>
+  </div>
+
+  <div class="mt-5 watch-table" >
+    <table class="table table-striped w-100 p-10">
+      <thead>
+        <tr>
+          <th class="table-resume--head">Identificador de la reserva</th>
+          <th class="table-resume--head">Nombre del cliente</th>
+          <th class="table-resume--head">Número de huéspedes</th>
+          <th class="table-resume--head">Fecha de entrada</th>
+          <th class="table-resume--head">Fecha de salida</th>
+          <th class="table-resume--head">Más información</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let booking of bookingsToShow
+              | filterDate : dateIn : dateOut : idValue
+          "
+        >
+          <th scope="row" class="table-resume--body">{{ booking._id }}</th>
+          <td class="table-resume--body">{{ booking.user[0].name }}</td>
+          <td class="table-resume--body">{{ booking.persons }}</td>
+          <td class="table-resume--body">
+            {{ formatDateComponent(booking.dateIn) }}
+          </td>
+          <td class="table-resume--body">
+            {{ formatDateComponent(booking.dateOut) }}
+          </td>
+          <td class="table-resume--body d-flex justify-content-center">
+            <button class="btn btn-admin-pro">Detalle de la reserva</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="align-items-center flex-column watch-list">
+    <div class="card-booking" *ngFor="let booking of bookingsToShow | filterDate: dateIn : dateOut : idValue">
+      <h6>ID : {{booking._id}}</h6>
+      <span>Fecha de entrada: {{ formatDateComponent(booking.dateIn) }}</span>
+      <span>Fecha de entrada: {{ formatDateComponent(booking.dateOut) }}</span>
+      <button class="btn">Ver mas detalles</button>
+    </div>
+  </div>
+
+  <button type="button" class="btn mb-3" (click)="openModal()">
+    Crear habitación
+  </button>
+  <div
+    *ngIf="modalSwitch"
+    class="modal-room w-100 d-flex align-items-center justify-content-center"
+  >
+    <app-form-create-rooms
+    (connect)="getAnswer($event)"
+  ></app-form-create-rooms>
+  </div>
 </section>
