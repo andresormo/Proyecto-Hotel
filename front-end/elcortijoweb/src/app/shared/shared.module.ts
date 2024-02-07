@@ -6,20 +6,20 @@ import { FormUserComponent } from './components/form-user/form-user.component';
 import { FormCreateRoomsComponent } from './components/form-create-rooms/form-create-rooms.component';
 import { DateInPipe } from './pipes/filterDate/dateIn.pipe';
 import { ModalConfirmComponent } from './components/modals-type/modal-confirm/modal-confirm.component';
-import { FormBookingComponent } from './components/form-booking/form-booking/form-booking.component';
-import { FormPreBookingComponent } from './components/form-booking/form-pre-booking/form-pre-booking/form-pre-booking.component';
+import { FormPreBookingComponent } from './components/form-pre-booking/form-pre-booking.component';
+import { BookingDetailComponent } from './components/booking-detail/booking-detail.component';
 
 
 
 @NgModule({
   declarations: [
-    FormBookingComponent,
     CountClientComponent,
     FormUserComponent,
     FormCreateRoomsComponent,
     DateInPipe,
     ModalConfirmComponent,
-    FormPreBookingComponent
+    FormPreBookingComponent,
+    BookingDetailComponent
   ],
   imports: [
     CommonModule,
@@ -27,12 +27,12 @@ import { FormPreBookingComponent } from './components/form-booking/form-pre-book
     ReactiveFormsModule
   ],
   exports:[
-    FormBookingComponent,
     FormUserComponent,
     FormCreateRoomsComponent,
     DateInPipe,
     ModalConfirmComponent,
-    FormPreBookingComponent
+    FormPreBookingComponent,
+    BookingDetailComponent
   ]
 })
 export class SharedModule { }

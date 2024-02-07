@@ -20,18 +20,18 @@ export class MycountComponent implements OnInit {
     public bookingService: BookingService,
     public userService: UserAuthService
   ){
-    scroll(screenTop, 0)
+    scroll(screenTop, 0);
+    this.getBooking();
   }
 
   ngOnInit(): void {
-    this.getBooking();
-      this.user = this.userService.isUser()
+    this.user = this.userService.isUser();
   }
 
   public getBooking(){
-   this.bookingService.getAllBooking().subscribe((bookings: BookingI[])=>{
-    this.bookings = bookings;
-   })
-  }
+  this.bookingService.getAllBooking().subscribe((booking: BookingI[])=>{
+    this.bookings = booking;
+  })
 
+  }
 }

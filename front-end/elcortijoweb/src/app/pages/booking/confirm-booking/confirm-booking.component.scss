@@ -1,12 +1,11 @@
 @import './../../../../styles.scss';
 .card-booking{
-  width: 75%;
-  height: 600px;
   background-color: $colorMain;
-  border: 1px solid $colorHighligth;
+  border-radius: 25px;
 }
+
 .card-img{
   max-width: 400px;
   max-height: 400px;
 }
-//
+

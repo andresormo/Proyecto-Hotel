@@ -19,7 +19,6 @@ constructor(
 ){
   if (this.preBookingData !== null) {
       this.bookingToConfirmed = JSON.parse(this.preBookingData);
-      console.log('aqui llega');
   }
 }
 
@@ -30,6 +29,7 @@ public editBooking(){
 public createBooking(){
   if(this.bookingToConfirmed){
     this.bookingService.createBooking(this.bookingToConfirmed).subscribe();
+    localStorage.removeItem('preBooking')
   } else{
     return;
   }

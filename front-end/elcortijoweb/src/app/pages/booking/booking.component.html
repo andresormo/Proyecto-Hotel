@@ -12,8 +12,9 @@
 <!-- una vez tenemos la preserva y la confirmacion para abrir el siguiente componenre
 podemos lanzar el confirm-booking para finalizar la reserva o editarla en caso de error -->
 
-<section *ngIf="confirmComponent">
+<section *ngIf="confirmComponent" class="container">
 
+  <h3 class="text-center h-25">Confirmación de la reserva</h3>
   <app-confirm-booking  (editBookingRes)="editBooking($event)"></app-confirm-booking>
 </section>
 

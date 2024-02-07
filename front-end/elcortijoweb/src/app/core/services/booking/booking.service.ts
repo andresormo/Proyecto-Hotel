@@ -1,4 +1,4 @@
-import { Token } from '@angular/compiler';
+
 import { Injectable } from '@angular/core';
 import { ApiBookingService } from './api/api-booking.service';
 import { Observable, map } from 'rxjs';
@@ -16,6 +16,11 @@ export class BookingService {
   public getAllBooking(): Observable<BookingI[]>{
     return this.apiBookingServive.getApiBooking().pipe(map((apiBooking: ApiBooking[])=> this.transformBooking(apiBooking)))
   }
+
+  public getBookingById(id:string): Observable<BookingI>{
+    return this.apiBookingServive.getApiBookingId(id).pipe(map((apiBooking:ApiBooking)=> this.transformBookingOne(apiBooking)))
+  }
+
 
   public createBooking(body: BookingI): Observable<BookingI>{
     return this.apiBookingServive.createBooking(body).pipe(map((apiBooking)=>this.transformBookingOne(apiBooking)))

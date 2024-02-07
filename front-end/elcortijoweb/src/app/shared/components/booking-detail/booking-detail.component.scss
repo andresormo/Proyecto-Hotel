@@ -1,0 +1,64 @@
+@import './../../../../styles.scss';
+
+.selected{
+  background-color: $colorSecondary;
+}
+
+.control_error{
+  text-align: center;
+  color: $colorTertiary;
+}
+
+.control_succes{
+  color:$colorParagraph;
+}
+
+.addQuitBed{
+  padding: 0;
+  width: 20px;
+  text-align: center;
+  height: 50%;
+  margin: 3px;
+}
+.addQuitBed:hover{
+  box-shadow: none;
+  background-color: $colorButton;
+  color: $colorHeadline;
+}
+.addQuitBed:active{
+  background-color: $colorButton;
+  box-shadow: none;
+}
+
+.number-bed{
+  width: 80px;
+  text-align: center;
+}
+
+.img-preview{
+  width: 120px;
+  height: 120px;
+  margin: 10px;
+}
+
+.span-bin{
+  cursor: pointer;
+}
+
+.icon{
+ font-size: 25px;
+  cursor: pointer;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+.modal-form{
+  position: relative;
+}
+
+.container{
+  position: relative;
+}
+.disable{
+  pointer-events: none;
+}
