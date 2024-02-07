@@ -26,11 +26,12 @@
     </div>
     <div>
       <label class="form-label" for="password">Contraseña</label>
-      <input class="form-control" type="password" formControlName="password">
+      <input class="form-control" type="password" formControlName="password" required="">
     </div>
   </div>
 
     <div class="mt-2">
+      <p *ngIf="succesUser" class="error-control">Algo ha ido mal, revisa los datos</p>
       <button class="btn" type="submit">Crear usuario</button>
     </div>
   </form>

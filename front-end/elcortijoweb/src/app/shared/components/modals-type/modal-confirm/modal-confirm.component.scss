@@ -1,0 +1,24 @@
+@import './../../../../../styles.scss';
+
+.modal-confirm{
+  width: 70%;
+  padding: 8px;
+  background-color: $colorTertiary;
+  border: 1px solid $colorTertiary;
+  border-radius: 25px;
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  z-index: 1;
+
+}
+
+.text{
+  color: $colorMain;
+  text-align: center;
+}
+
+.btn-modal:hover{
+background-color: $colorButton;
+color: $colorMain;
+}

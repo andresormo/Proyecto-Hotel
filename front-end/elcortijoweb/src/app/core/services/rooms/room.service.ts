@@ -2,7 +2,6 @@ import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import { RoomI } from './models/room.interface';
 import { ApiRoomService } from './api/api-room.service';
-import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -18,6 +17,10 @@ export class RoomService {
 
   public getAllRoom(): Observable<RoomI[]>{
     return this.roomService.getApiRoom()
+  }
+
+  public getRoomById(id:string): Observable<RoomI>{
+    return this.roomService.getApiRoomById(id);
   }
 
   public createRoom(body: FormData): Observable<RoomI>{

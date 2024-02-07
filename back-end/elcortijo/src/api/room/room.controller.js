@@ -23,16 +23,25 @@ const getRoomById = async (req, res, next)=>{
 }
 
 const createRoom = async ( req,res, next)=>{
+    console.log('esto es', req.headers['content-type']);
     try {
         const newRoom = new Room(req.body);
-        if(req.file){
-            newRoom.images = req.file.path;
+        const arrayImg = [];
+        
+        if(req.files){
+        for (let i = 0; i < req.files.length; i++) {
+            
+            arrayImg.push(req.files[i].path);
+            newRoom.images = arrayImg;
+        }   
         }
+        console.log(newRoom);
         await newRoom.save();
         return res.json(newRoom);
 
     } catch (error) {
-        return next(error);
+        
+        return console.log("este es elerror:", error);
     }
 }
 

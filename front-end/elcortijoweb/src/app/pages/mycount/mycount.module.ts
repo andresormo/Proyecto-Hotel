@@ -7,18 +7,21 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { FormCreateRoomsComponent } from 'src/app/shared/components/form-create-rooms/form-create-rooms.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { UserProfileComponent } from './user/user-profile.component';
+import { BookingDetailComponent } from 'src/app/shared/components/booking-detail/booking-detail.component';
 
 
 @NgModule({
   declarations: [
     MycountComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MycountRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class MycountModule { }

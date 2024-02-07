@@ -2,7 +2,7 @@ import { UserI } from './../../../core/services/user-auth/models/user.model';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserAuthService } from 'src/app/core/services/user-auth/user-auth.service';
-import { formDataFunction, initForm, onFileSelectedFunction } from '../models/function-user-form';
+import { formDataFunction, initForm, onFileSelectedFunction } from '../functions/function-user-form';
 
 @Component({
   selector: 'app-form-user',
@@ -14,6 +14,7 @@ export class FormUserComponent{
 @Input() public user?: UserI;
   public registerForm?: FormGroup;
   public formData?: FormData;
+  public succesUser: boolean = false;
 
   constructor(
     private userService: UserAuthService,
@@ -28,6 +29,9 @@ export class FormUserComponent{
       console.log(this.registerForm.value);
 
       this.createuser()
+      this.succesUser=false
+    } else{
+      this.succesUser=true;
     }
   }
 

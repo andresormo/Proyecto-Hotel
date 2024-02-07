@@ -18,6 +18,10 @@ export class ApiRoomService {
     return this.http.get<ApiRoom[]>(`${API_URL}/rooms`)
   }
 
+  public getApiRoomById(id:string): Observable<ApiRoom>{
+    return this.http.get<ApiRoom>(`${API_URL}/rooms/room/${id}`)
+  }
+
   public createApiRoom(body: FormData): Observable<ApiRoom>{
     return this.http.post<ApiRoom>(`${API_URL}/rooms`, body)
   }

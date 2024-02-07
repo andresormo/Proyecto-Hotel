@@ -1,0 +1,17 @@
+<div *ngIf="bookingToConfirmed" class="d-flex flex-column align-items-center card-booking p-3">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <span>Fecha de entrada: {{bookingToConfirmed.dateIn}}</span>
+    <span>Fecha de salida: {{bookingToConfirmed.dateOut}}</span>
+    <span>Número de personas: {{bookingToConfirmed.persons}}</span>
+  </div>
+
+<figure *ngFor="let image of bookingToConfirmed.room.images" class="d-flex flex-column justify-content-center align-items-center mt-2 w-100">
+  <img src="{{image}}" alt="" class="card-img">
+  <figcaption>{{bookingToConfirmed.room.description}}</figcaption>
+</figure>
+
+<div class="d-flex flex-column w-25">
+  <button class="btn mb-2" (click)="editBooking()">Editar reserva</button>
+  <button class="btn" (click)="createBooking()">Confirmar Reserva</button>
+</div>
+</div>

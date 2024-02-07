@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BookingI } from 'src/app/core/services/booking/models/booking.interface';
 import { formatDateFunction } from '../functions/functios';
 
@@ -10,19 +10,50 @@ import { formatDateFunction } from '../functions/functios';
 export class AdminProfileComponent{
   @Input() public bookingsToShow?: BookingI[];
 
-  public dateIn: Date;
-  public dateOut: Date;
+
+  public dateIn: Date = new Date();
+  public dateOut?: Date;
+  public idValue: string = '';
+  public modalSwitch?: boolean;
+
+  public idBookingToShow?: string;
+
 
   constructor(){
-    this.dateIn = new Date();
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 7);
-    this.dateOut = nextWeek;
+    this.addDaysAtDate();
+  }
+
+  public openModal(){
+    this.modalSwitch = true
   }
 
 
+  public getAnswer(answer: boolean){
+    this.modalSwitch = answer;
+  }
+
+  public showDetailModal(id:string){
+    this.idBookingToShow = id;
+    console.log(this.idBookingToShow);
+
+  }
+
+  public addDaysAtDate(){
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 14);
+    this.dateOut = nextWeek;
+  }
   public formatDateComponent(date:Date){
     return formatDateFunction(date);
+  }
+
+  public resetInput(condition: string){
+    if(condition === 'dateIn'){
+      this.dateIn = new Date();
+      this.addDaysAtDate()
+    } else if(condition === 'id'){
+      this.idValue = '';
+    }
   }
 
 }

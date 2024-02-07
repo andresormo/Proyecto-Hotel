@@ -1,5 +1,8 @@
-<section>
+<div *ngIf="bookings">
   <app-admin-profile *ngIf="user==='admin'" [bookingsToShow]="bookings"></app-admin-profile>
-</section>
+  <app-user-profile *ngIf="user === 'user'" [bookingsToShow]="bookings"></app-user-profile>
+</div>
+
+
 
 

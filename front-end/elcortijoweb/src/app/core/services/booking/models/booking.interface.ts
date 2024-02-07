@@ -7,7 +7,7 @@ export interface ApiBooking{
   user: UserI[],
   dateIn: Date,
   dateOut:Date,
-  room:ApiRoom[],
+  room:ApiRoom,
   persons:number,
   ceatedAt?:Date,
   updateUp?:Date,
@@ -20,6 +20,6 @@ export interface BookingI{
   user: UserI[],
   dateIn: Date,
   dateOut:Date,
-  room:ApiRoom[],
+  room:ApiRoom,
   persons:number
 }

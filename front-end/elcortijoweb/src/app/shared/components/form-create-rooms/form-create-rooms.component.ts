@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BedsService } from 'src/app/core/services/beds/beds.service';
 import { BedI } from 'src/app/core/services/beds/models/bed.interface';
@@ -9,7 +9,7 @@ import {
   initFormRoom,
   onFileSelectedFunction,
   toggleBedfunction,
-} from '../models/function-user-form';
+} from '../functions/function-user-form';
 
 @Component({
   selector: 'app-form-create-rooms',
@@ -19,6 +19,9 @@ import {
 export class FormCreateRoomsComponent implements OnInit{
   public roomForm?: FormGroup;
   public formData?: FormData;
+
+  @Output() connect = new EventEmitter();
+  public confirmClosedModal?: boolean;
 
   public rooms?: RoomI;
   public beds?: BedI[];
@@ -44,9 +47,22 @@ ngOnInit(): void {
   this.bedService.getAllBeds().subscribe((bed: BedI[]) => {
     this.beds = bed;
   });
+
   this.roomForm = initFormRoom(this.rooms, this.fb);
 }
 
+
+//Manejo de modales, envio de informacion entre componentes
+public getAnswer(answer: boolean){
+  this.connect.emit(answer);
+  answer ? this.openConfirm(!answer) : this.openConfirm(answer);
+}
+
+public openConfirm(open:boolean){
+  this.confirmClosedModal = open;
+}
+
+//-------------------- Submit de la accion-----
   public submitForm() {
     this.formData = formDataRecovery(
       this.roomForm, this.arrayBeds, this.arrayimg
@@ -75,6 +91,7 @@ ngOnInit(): void {
 
   }
 
+  //Seleccionar files
   public onFileSelectImg(event: Event) {
       onFileSelectedFunction(event, this.roomForm, this.arrayimg, this.arraybase64);
 
@@ -84,7 +101,7 @@ ngOnInit(): void {
       }
   }
 
-
+//Seleccionar o aumentar el numero de camas
   public toggleBed(bedId: string, max: number, name: string) {
     this.maxCapacity += max;
 
@@ -99,7 +116,9 @@ ngOnInit(): void {
     this.roomForm?.setControl('capacity', this.fb.control(this.capacityValue));
   }
 
+  //Eliminar imagenes precargadas
   public deleteImg(index:number){
     this.arraybase64.splice(index, 1)
   }
+
 }
