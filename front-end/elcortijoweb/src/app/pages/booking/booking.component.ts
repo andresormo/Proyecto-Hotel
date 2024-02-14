@@ -8,7 +8,7 @@ import { RoomService } from 'src/app/core/services/rooms/room.service';
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.scss'],
 })
-export class BookingComponent {
+export class BookingComponent{
   public rooms?: RoomI[];
   public idRoomSelect?: string;
   public confirmComponent:boolean = false;
@@ -20,14 +20,18 @@ export class BookingComponent {
     }
   }
 
-  constructor(private roomService: RoomService) {
+  constructor(
+    private roomService: RoomService
+    ) {
     this.getRoom()
   }
 
+
+
   public getRoom() {
-    this.roomService.getAllRoom().subscribe((room: RoomI[]) => {
-      this.rooms = room;
-    });
+      this.roomService.getAllRoom().subscribe((room: RoomI[]) => {
+        this.rooms = room;
+      });
   }
 
   public getConfirm(confirm:boolean){

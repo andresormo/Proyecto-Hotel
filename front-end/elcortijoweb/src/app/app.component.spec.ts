@@ -4,12 +4,14 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { ActivatedRoute } from '@angular/router';
+import { AuthServiceStub } from './core/services/user-auth/user-auth.service.stub';
+import { UserAuthService } from './core/services/user-auth/user-auth.service';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, CoreModule, HttpClientModule],
+    imports: [RouterTestingModule, CoreModule],
     declarations: [AppComponent],
-    providers: []
+    providers: [{provide: UserAuthService, useClass: AuthServiceStub}]
   }));
 
   it('should create the app', () => {

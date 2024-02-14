@@ -4,7 +4,7 @@ export interface UserI{
   surname:string,
   email: string,
   password: string,
-  image:string,
+  image?:string,
   rol:string,
   createdAt?: string,
   updateAt?: string,

@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeaderComponent } from './header.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterLink, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterLink} from '@angular/router';
+import { UserAuthService } from '../../services/user-auth/user-auth.service';
+import { AuthServiceStub } from '../../services/user-auth/user-auth.service.stub';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -15,10 +14,9 @@ describe('HeaderComponent', () => {
       declarations: [HeaderComponent],
       imports:[
         RouterLink,
-        HttpClientModule,
-        RouterModule,
-        NgModule
-      ]
+        RouterTestingModule,
+      ],
+      providers:[ {provide: UserAuthService, useClass: AuthServiceStub} ]
     });
 
 
